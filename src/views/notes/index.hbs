@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-10 offset-sm-1">
+            <h3>Hello {{user.name}}</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 offset-sm-1">
+            <a href="/notes/create" class="btn btn-primary my-2">Create note</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-10 offset-sm-1">
+            {{#if notes}}
+            <div class="card-columns">
+                {{#each notes}}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            {{title}}
+                            <a href="/notes/{{_id}}/edit" class="btn btn-link btn-sm float-right">
+                                <i class="far fa-edit"></i>
+                            </a>
+                            <a href="/notes/{{_id}}" class="btn btn-link btn-sm float-right">
+                                <i class="fas fa-info-circle"></i>
+                            </a>
+                        </h5>
+                        <p class="card-text">{{description}}</p>
+                        <p class="card-text"><small class="text-muted">{{date}}</small></p>
+                        <form action="/notes/{{_id}}?_method=DELETE" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-block btn-sm">
+                                <i class="far fa-trash-alt"></i> Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+            {{else}}
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        There are not notes yet
+                    </h5>
+                    <a href="/notes/create" class="btn btn-link">
+                        <i class="fas fa-plus"></i> Create
+                    </a>
+                </div>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>
